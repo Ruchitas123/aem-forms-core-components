@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/corecomponents" mode="merge"/>
+    <filter root="/content/corecomponents" mode="merge"/>
+    <filter root="/content/dam/corecomponents" mode="merge">
+        <exclude pattern="/content/dam/corecomponents(/.*)?"/>
+        <include pattern="/content/dam/corecomponents/jcr:content(/.*)?"/>
+    </filter>
+    <filter root="/content/dam/corecomponents/asset.jpg" mode="merge"/>
+    <filter root="/content/experience-fragments/corecomponents" mode="merge"/>
+    <filter root="/content/dam/formsanddocuments-themes/corecomponents" mode="merge"/>
+    <filter root="/content/dam/formsanddocuments-fdm/corecomponents" mode="merge"/>
+    <filter root="/content/dam/corecomponents/sample_logo.png" mode="merge"/>
+    <filter root="/content/dam/corecomponents/sample_terms.png" mode="merge"/>
+    <filter root="/etc/clientlibs/hindisupportlocale"/>
+    <filter root="/etc/clientlibs/telugusupportlocale"/>
+    <filter root="/etc/languages"/>
+</workspaceFilter>

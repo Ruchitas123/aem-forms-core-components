@@ -1,0 +1,32 @@
+  .cmp-adaptiveform-scalerating {
+    display: flex;
+    align-items: center;
+  }
+    .cmp-adaptiveform-star--label {
+      font-size: 50px;
+    line-height: 1;
+    color:black;
+      position: relative;
+    z-index: 1;
+  }
+  
+  .cmp-adaptiveform-star {
+    font-size: 50px;
+    line-height: 1;
+    color: pink;
+    transition: 0.2s ease;
+  }
+  .cmp-adaptiveform-star:hover {
+    color: yellow;
+    transition: 0.2s ease;
+  }
+  /* Style the filled stars */
+  .cmp-adaptiveform_star--filled {
+    color: red;
+  }
+  .cmp-adaptiveform-star.active ~ .star {
+    color: pink;
+  }
+  .cmp-adaptiveform-star.active ~ input {
+    display: none;
+  }
