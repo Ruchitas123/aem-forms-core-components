@@ -15,7 +15,11 @@
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
  package com.corecomponents.core.models;
 
- //import javax.annotation.Nullable;
+ import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.ArrayUtils;
+//import javax.annotation.Nullable;
  import org.apache.sling.api.SlingHttpServletRequest;
  import org.apache.sling.api.resource.Resource;
  import org.apache.sling.models.annotations.Exporter;
@@ -27,6 +31,7 @@ import org.osgi.annotation.versioning.ConsumerType;
 import com.adobe.cq.export.json.ComponentExporter;
 import com.adobe.cq.export.json.ExporterConstants;
 import com.adobe.cq.forms.core.components.util.AbstractBaseImpl;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
  
  @Model(
@@ -45,6 +50,16 @@ import com.adobe.cq.forms.core.components.util.AbstractBaseImpl;
  
     public Integer getStarnumber() {
         return starnumber;
+    }
+
+    @JsonIgnore
+    public Object[] getRatingList() {
+        List<Integer> ls = new ArrayList<>();
+
+        for(int i = 0; i < starnumber; i++) {
+            ls.add(i);
+        }
+        return ls.toArray();
     }
 
  }
