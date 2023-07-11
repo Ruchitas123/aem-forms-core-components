@@ -5,10 +5,11 @@
   data-sly-use.errorMessage="${renderer.errorMessagePath}" data-sly-use.questionMark="${renderer.questionMarkPath}">
 </sly>
 <div class="cmp-adaptiveform-starrating" data-cmp-is="adaptiveFormStarRating" id="${component.id}"
-
-  data-sly-use.formstructparser="com.adobe.cq.forms.core.components.models.form.FormStructureParser"
+data-sly-use.formstructparser="com.adobe.cq.forms.core.components.models.form.FormStructureParser"
+  data-sly-use.starrating="com.corecomponents.core.models.StarRatingGroup"
+  
   data-sly-use.component="com.adobe.cq.wcm.core.components.models.Component"
-  data-sly-use.starrating="com.adobe.cq.forms.core.components.models.form.CheckBoxGroup"
+  
   data-cmp-adaptiveformcontainer-path="${formstructparser.formContainerPath}">
   <div
     data-sly-call="${label.label @componentId=component.id, labelVisible=starrating.label.hide, bemBlock='cmp-adaptiveform-starrating__label'}"
@@ -26,11 +27,9 @@
   <div data-sly-call="${errorMessage.errorMessage @componentId=component.id, bemBlock='cmp-adaptiveform-starrating'}"
     data-sly-unwrap></div>
     <div class="cmp-adaptiveform-starrating">
-      <div data-sly-list="${starrating.enums}" data-sly-unwrap>
-        <label class="cmp-adaptiveform-starrating__label"
-          title="${starrating.tooltipVisible ? '' : starrating.tooltipText}">
+      <div data-sly-list="${starrating.ratingList}" data-sly-unwrap>
           <input class="cmp-adaptiveform-starrating__input" type="checkbox" name="${starrating.name}"
-            id="${starrating.enums[itemList.index].toString}"
+            id="${starrating.ratingList[itemList.index].toString}"
             disabled="${!starrating.enabled || starrating.readOnly}"
             aria-readonly="${starrating.readOnly ? 'true' : 'false'}" />
         </label>
@@ -131,21 +130,3 @@ margin-left: 0.5rem;
 
 </style>
 </div>
-
-<script>
-const labelbutton = document.querySelectorAll('.cmp-adaptiveform-starrating__label');
-const stars = document.querySelectorAll('.cmp-adaptiveform-starrating__input');
-//const rating = document.querySelector('.cmp-adaptiveform-starrating');
-labelbutton.forEach((label, id) => {
-  label.addEventListener('click', () => {
-    for (let i = 0; i <= id; i++) {
-      stars[i].checked = true;
-      labelbutton[i].classList.add('cmp-adaptiveform-starrating__label--filled');
-    }
-    for (let i = id + 1; i < stars.length; i++) {
-      stars[i].checked = false;
-      labelbutton[i].classList.remove('cmp-adaptiveform-starrating__label--filled');
-    }
-  });
-});
-</script>
