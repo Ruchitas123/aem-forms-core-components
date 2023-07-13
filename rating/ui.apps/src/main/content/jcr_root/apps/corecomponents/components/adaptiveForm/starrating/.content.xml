@@ -3,4 +3,6 @@
     jcr:description="Adaptive Form Star Rating (v1) component"
     jcr:primaryType="cq:Component"
     jcr:title="Adaptive Form Star Rating"
+    sling:resourceSuperType="core/fd/components/form/base/v1/base"
+    cq:icon="StarFill"
     componentGroup="Core Components - Adaptive Form"/>

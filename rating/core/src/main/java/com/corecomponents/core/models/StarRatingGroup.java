@@ -42,9 +42,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  @Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
  public class StarRatingGroup extends AbstractBaseImpl {
 
-    public final static String STAR_RESOURCE_TYPE = "corecomponents/components/adaptiveForm/scalerating";
+    public final static String STAR_RESOURCE_TYPE = "corecomponents/components/adaptiveForm/starrating";
 
-    @ValueMapValue
+    @ValueMapValue(injectionStrategy = InjectionStrategy.OPTIONAL)
     private Integer starnumber;
 
  
@@ -54,7 +54,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
     @JsonIgnore
     public Object[] getRatingList() {
-        List<Integer> ls = new ArrayList<>();
+        List<String> ls = new ArrayList<>();
 
         for(int i = 0; i < starnumber; i++) {
             ls.add(i);
