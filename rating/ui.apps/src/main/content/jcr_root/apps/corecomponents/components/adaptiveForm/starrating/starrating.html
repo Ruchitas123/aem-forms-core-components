@@ -1,132 +1,45 @@
 <sly data-sly-use.renderer="${'starrating.js'}"
-  data-sly-use.clientlib="${'/libs/granite/sightly/templates/clientlib.html'}"
-  data-sly-use.label="${renderer.labelPath}" data-sly-use.shortDescription="${renderer.shortDescriptionPath}"
-  data-sly-use.longDescription="${renderer.longDescriptionPath}"
-  data-sly-use.errorMessage="${renderer.errorMessagePath}" data-sly-use.questionMark="${renderer.questionMarkPath}">
+     data-sly-use.clientlib="${'/libs/granite/sightly/templates/clientlib.html'}"
+     data-sly-use.label="${renderer.labelPath}" data-sly-use.shortDescription="${renderer.shortDescriptionPath}"
+     data-sly-use.longDescription="${renderer.longDescriptionPath}"
+     data-sly-use.errorMessage="${renderer.errorMessagePath}" data-sly-use.questionMark="${renderer.questionMarkPath}">
 </sly>
-<div class="cmp-adaptiveform-starrating" data-cmp-is="adaptiveFormStarRating" id="${component.id}"
-data-sly-use.formstructparser="com.adobe.cq.forms.core.components.models.form.FormStructureParser"
-  data-sly-use.starrating="com.corecomponents.core.models.StarRatingGroup"
-  
-  data-sly-use.component="com.adobe.cq.wcm.core.components.models.Component"
-  
-  data-cmp-adaptiveformcontainer-path="${formstructparser.formContainerPath}">
-  <div
-    data-sly-call="${label.label @componentId=component.id, labelVisible=starrating.label.hide, bemBlock='cmp-adaptiveform-starrating__label'}"
-    data-sly-unwrap></div>
-  <div
-    data-sly-call="${questionMark.questionMark @componentId=component.id, longDescription=starrating.description, bemBlock='cmp-adaptiveform-starrating'}"
-    data-sly-unwrap></div>
-  <div
-    data-sly-call="${shortDescription.shortDescription @componentId=component.id, shortDescriptionVisible=starrating.tooltipVisible, shortDescription=starrating.tooltip, bemBlock='cmp-adaptiveform-starrating'}"
-    data-sly-unwrap>
-  </div>
-  <div
-    data-sly-call="${longDescription.longDescription @componentId=component.id, longDescription=starrating.description, bemBlock='cmp-adaptiveform-starrating'}"
-    data-sly-unwrap></div>
-  <div data-sly-call="${errorMessage.errorMessage @componentId=component.id, bemBlock='cmp-adaptiveform-starrating'}"
-    data-sly-unwrap></div>
-    <div class="cmp-adaptiveform-starrating">
-      <div data-sly-list="${starrating.ratingList}" data-sly-unwrap>
-          <input class="cmp-adaptiveform-starrating__input" type="checkbox" name="${starrating.name}"
-            id="${starrating.ratingList[itemList.index].toString}"
-            disabled="${!starrating.enabled || starrating.readOnly}"
-            aria-readonly="${starrating.readOnly ? 'true' : 'false'}" />
-        </label>
-      </div>
+<div class="cmp-adaptiveform-starrating" data-cmp-is="adaptiveFormStarRating"
+     data-sly-use.formstructparser="com.adobe.cq.forms.core.components.models.form.FormStructureParser"
+     data-sly-use.starrating="com.corecomponents.core.models.StarRatingGroup"
+     data-sly-use.component="com.adobe.cq.wcm.core.components.models.Component"
+     id="${component.id}"
+     data-cmp-adaptiveformcontainer-path="${formstructparser.formContainerPath}">
+
+    <div data-sly-call="${label.label @componentId=starrating.id, labelValue=starrating.label.value, labelVisible=starrating.label.visible, bemBlock='cmp-adaptiveform-starrating'}" data-sly-unwrap></div>
+    <div class="cmp-adaptiveform-starrating__widget">
+        <div data-sly-list="${starrating.ratingList}" data-sly-unwrap>
+            <input class="cmp-adaptiveform-starrating__option__widget" type="radio"
+                   name="${component.id}"
+                   id="${component.id} - ${itemList.index}"
+                   value="${starrating.ratingList[itemList.index].toString}"
+                   disabled="${!starrating.enabled || starrating.readOnly}"
+                   aria-readonly="${starrating.readOnly ? 'true' : 'false'}"/>
+            <label for="${component.id} - ${itemList.index}"></label>
+        </div>
+    </div>
+    <div
+            data-sly-call="${questionMark.questionMark @componentId=component.id, longDescription=starrating.description, bemBlock='cmp-adaptiveform-starrating'}"
+            data-sly-unwrap></div>
+    <div
+            data-sly-call="${shortDescription.shortDescription @componentId=component.id, shortDescriptionVisible=starrating.tooltipVisible, shortDescription=starrating.tooltip, bemBlock='cmp-adaptiveform-starrating'}"
+            data-sly-unwrap>
+    </div>
+    <div
+            data-sly-call="${longDescription.longDescription @componentId=component.id, longDescription=starrating.description, bemBlock='cmp-adaptiveform-starrating'}"
+            data-sly-unwrap></div>
+    <div data-sly-call="${errorMessage.errorMessage @componentId=component.id, bemBlock='cmp-adaptiveform-starrating'}"
+         data-sly-unwrap></div>
+    <div>
+    </div>
 </div>
 
-<div>
-</div>
-
-<div>
-  <style>
-    /* Style the container and remove default checkbox styles */
-.cmp-adaptiveform-starrating {
-    display: flex;
-    align-items: center;
-  }
-  
-  .cmp-adaptiveform-starrating__input {
-    display: none;
-  }
-  
-    /* set properties of all labels */
-    .cmp-adaptiveform-starrating__label {
-        width: 50px;
-        height: 50px;
-        font-family: Arial;
-        font-size: 50px;
-        transition: 0.2s ease;
-        color: pink;
-    }
-
-    .cmp-adaptiveform-starrating__label:before {
-    content: "\2605";
-  }
-     
-    /* give label a hover state */
-    .cmp-adaptiveform-starrating__label:hover {
-        color: yellow;
-        transition: 0.2s ease;
-        }
-    
-  /* Style the filled stars */
-  .cmp-adaptiveform-starrating__label--filled {
-    color: red;
-  }
-
-    .cmp-adaptiveform-starrating__longdescription {
-    font-size: 14px;
-    font-weight: bold;
-    color: #555;
-    margin-top: 50px auto;
-    }
-    
-    .cmp-adaptiveform-starrating__shortdescription {
-    font-size: 14px;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-    margin-bottom: 50px auto;
-    }
-    
-    .cmp-adaptiveform-starrating__questionmark {
-    position: relative;
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background-color: #333;
-    color: black;
-    font-size: 0.8rem;
-    text-align: center;
-    line-height: 1rem;
-    margin-left: 0.5rem;
-    }
-    
-
-.cmp-adaptiveform-starrating__shortdescription {
-font-size: 14px;
-font-weight: bold;
-color: #333;
-text-align: center;
-margin-bottom: 50px auto;
-}
-
-.cmp-adaptiveform-starrating__questionmark {
-position: relative;
-display: inline-block;
-width: 5px;
-height: 5px;
-border-radius: 50%;
-background-color: #333;
-color: black;
-font-size: 0.8rem;
-text-align: center;
-line-height: 1rem;
-margin-left: 0.5rem;
-}
-
-</style>
-</div>
+<sly data-sly-use.clientlibs="${'com.adobe.cq.wcm.core.components.models.ClientLibraries' @
+    categories='core.forms.components.starrating.v1.runtime', defer=true}">
+    ${clientlibs.jsAndCssIncludes @ context="unsafe"}
+</sly>
