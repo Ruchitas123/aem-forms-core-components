@@ -1,0 +1,15 @@
+{
+  "type": "VALIDATION_ERROR",
+  "title": "Validation error",
+  "detail": "Please check value.",
+  "instance": "abc",
+  "status": "{{oneOf (array 'failed')}}"
+  "errors": [
+    {
+      "transactionId": "asdc123",
+      "message": "Bank api connection timeout."
+    }
+  ]
+}
+
+ 
