@@ -1,0 +1,318 @@
+{
+
+  "uuid": "33aa4c58-77af-4f96-bb74-60af68bcc9e0",
+
+  "lastMigration": 27,
+
+  "name": "Swagger Payment Error",
+
+  "endpointPrefix": "v2",
+
+  "latency": 0,
+
+  "port": 3002,
+
+  "hostname": "",
+
+  "folders": [],
+
+  "routes": [
+
+    {
+
+      "uuid": "30495aee-9e4e-4019-9f25-67fe1469ab2f",
+
+      "type": "http",
+
+      "documentation": "Process payment request by ID",
+
+      "method": "post",
+
+      "endpoint": "payment-gateway/payment-requests/:paymentId",
+
+      "responses": [
+
+        {
+
+          "uuid": "67118fe8-8420-471e-8ca7-beeb21dc8a7e",
+
+          "body": "{\n  \"type\": \"payment-request\",\n  \"amount\": 100,\n  \"status\": \"{{oneOf (array 'success' 'pending')}}\"\n}",
+
+          "latency": 0,
+
+          "statusCode": 200,
+
+          "label": "successful operation",
+
+          "headers": [
+
+            {
+
+              "key": "Content-Type",
+
+              "value": "application/json"
+
+            }
+
+          ],
+
+          "bodyType": "INLINE",
+
+          "filePath": "",
+
+          "databucketID": "",
+
+          "sendFileAsBody": false,
+
+          "rules": [],
+
+          "rulesOperator": "OR",
+
+          "disableTemplating": false,
+
+          "fallbackTo404": false,
+
+          "default": true
+
+        },
+
+        {
+
+          "uuid": "19afc2a5-20a2-4b9b-8ae1-cb446d3f9121",
+
+          "body": "{\n  \"type\": \"VALIDATION_ERROR\",\n  \"title\": \"Validation error\",\n  \"detail\": \"Please check value.\",\n  \"instance\": \"abc\",\n  \"status\": \"{{oneOf (array 'failed')}}\"\n  \"errors\": [\n    {\n      \"transactionId\": \"asdc123\",\n      \"message\": \"Bank api connection timeout.\"\n    }\n  ]\n}",
+
+          "latency": 0,
+
+          "statusCode": 400,
+
+          "label": "",
+
+          "headers": [
+
+            {
+
+              "key": "Content-Type",
+
+              "value": "application/problem+json"
+
+            }
+
+          ],
+
+          "bodyType": "INLINE",
+
+          "filePath": "",
+
+          "databucketID": "",
+
+          "sendFileAsBody": false,
+
+          "rules": [],
+
+          "rulesOperator": "OR",
+
+          "disableTemplating": false,
+
+          "fallbackTo404": false,
+
+          "default": false
+
+        }
+
+      ],
+
+      "enabled": true,
+
+      "responseMode": "SEQUENTIAL"
+
+    },
+
+    {
+
+      "uuid": "95f4d4c1-fc03-4082-a5e8-3cc4bc322e51",
+
+      "type": "http",
+
+      "documentation": "Get customer detail by emailId",
+
+      "method": "get",
+
+      "endpoint": "customer/:emailId",
+
+      "responses": [
+
+        {
+
+          "uuid": "2bc8d701-fe23-4cb6-9ceb-809b03b9a704",
+
+          "body": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Timber\",\n  \"amount\": 100,\n  \"item\": \"{{oneOf (array 'laptop' 'mouse' 'desktop')}}\"\n}",
+
+          "latency": 0,
+
+          "statusCode": 200,
+
+          "label": "successful operation",
+
+          "headers": [
+
+            {
+
+              "key": "Content-Type",
+
+              "value": "application/json"
+
+            }
+
+          ],
+
+          "bodyType": "INLINE",
+
+          "filePath": "",
+
+          "databucketID": "",
+
+          "sendFileAsBody": false,
+
+          "rules": [],
+
+          "rulesOperator": "OR",
+
+          "disableTemplating": false,
+
+          "fallbackTo404": false,
+
+          "default": true
+
+        },
+
+        {
+
+          "uuid": "3711498b-4368-42b6-9947-fbb824d9e52d",
+
+          "body": "{\n  \"type\": \"VALIDATION_ERROR\",\n  \"title\": \"Validation error\",\n  \"detail\": \"Please check value.\",\n  \"instance\": \"abc\",\n  \"validationErrors\": [\n    {\n      \"fieldName\": \"guide[0].guide1[0].guideRootPanel[0].general[0].basics1[0].textbox1455878674524[0]\",\n      \"dataRef\": \"\",\n      \"details\": [\n        \"Invalid emailId provided! Please register first.\"\n      ]\n    }\n  ]\n}",
+
+          "latency": 0,
+
+          "statusCode": 400,
+
+          "label": "",
+
+          "headers": [
+
+            {
+
+              "key": "Content-Type",
+
+              "value": "application/problem+json"
+
+            }
+
+          ],
+
+          "bodyType": "INLINE",
+
+          "filePath": "",
+
+          "databucketID": "",
+
+          "sendFileAsBody": false,
+
+          "rules": [],
+
+          "rulesOperator": "OR",
+
+          "disableTemplating": false,
+
+          "fallbackTo404": false,
+
+          "default": false
+
+        }
+
+      ],
+
+      "enabled": true,
+
+      "responseMode": "SEQUENTIAL"
+
+    }
+
+  ],
+
+  "rootChildren": [
+
+    {
+
+      "type": "route",
+
+      "uuid": "30495aee-9e4e-4019-9f25-67fe1469ab2f"
+
+    },
+
+    {
+
+      "type": "route",
+
+      "uuid": "95f4d4c1-fc03-4082-a5e8-3cc4bc322e51"
+
+    }
+
+  ],
+
+  "proxyMode": false,
+
+  "proxyHost": "",
+
+  "proxyRemovePrefix": false,
+
+  "tlsOptions": {
+
+    "enabled": false,
+
+    "type": "CERT",
+
+    "pfxPath": "",
+
+    "certPath": "",
+
+    "keyPath": "",
+
+    "caPath": "",
+
+    "passphrase": ""
+
+  },
+
+  "cors": true,
+
+  "headers": [],
+
+  "proxyReqHeaders": [
+
+    {
+
+      "key": "",
+
+      "value": ""
+
+    }
+
+  ],
+
+  "proxyResHeaders": [
+
+    {
+
+      "key": "",
+
+      "value": ""
+
+    }
+
+  ],
+
+  "data": []
+
+}
+
