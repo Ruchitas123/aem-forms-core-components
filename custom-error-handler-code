@@ -1,0 +1,35 @@
+/**
+
+    Custom Error handler
+
+        * @name customErrorHandler Custom Error Handler Function
+
+        * @errorHandler
+
+        */
+
+        function customErrorHandler(response, headers, globals)
+
+        {
+
+            console.log("Custom Error Handler processing start...");
+
+            console.log("response:"+JSON.stringify(response));
+
+            console.log("headers:"+JSON.stringify(headers));
+
+            guidelib.dataIntegrationUtils.defaultErrorHandler(response, headers);
+
+            console.log("Custom Error Handler processing end...");
+
+            if( window.formAnalytics) {
+
+                window.formAnalytics.customEventData.formName = "test";
+
+                window.formAnalytics.customEventData.error =  response.validationErrors[0].details[0];
+
+                window.dispatchEvent(new CustomEvent('formAnalyticsOnError'));
+
+            }
+
+        }
